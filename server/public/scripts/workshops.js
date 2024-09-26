@@ -103,57 +103,65 @@ const renderWorkshops = async () => {
 }
 
 const renderWorkshop = async () => {
-    const requestedID = parseInt(window.location.href.split('/').pop());
-    let response = await fetch('/workshops');
-    const workshops = await response.json();
-    const workshopContent = document.getElementById('workshop-content');
+    const requestedID = parseInt(window.location.href.split('/').pop())
+    let response = await fetch('/workshops')
+    const workshops = await response.json()
+    const workshopContent = document.getElementById('workshop-content')
     
-    let workshop = workshops.find(workshop => workshop.id === requestedID);
+    let workshop = workshops.find(workshop => workshop.id === requestedID)
     
     if (workshop) {
-        // Populate the workshop details
-        document.getElementById('name').textContent = workshop.title;
-        document.getElementById('workshopVideo').textContent = 'Workshop Link: ' + workshop.video_link;
-        document.getElementById('difficulty').textContent = 'Difficulty: ' + workshop.difficulty;
-        document.getElementById('leetcodeLink').textContent = 'Leetcode: ' + workshop.leetcode_link;
-        document.getElementById('rating').textContent = "Rating: " + workshop.rating;
-        document.getElementById('solutionSheet').textContent = "Solution Sheet: " + workshop.solution_sheet;
-        document.getElementById('discordLink').textContent = "Discord Link: " + workshop.discord_link;
+        document.getElementById('name').textContent = workshop.title
+        document.getElementById('workshopVideo').textContent = 'Workshop Link: ' + workshop.video_link
+        document.getElementById('difficulty').textContent = 'Difficulty: ' + workshop.difficulty
+        document.getElementById('leetcodeLink').textContent = 'Leetcode: ' + workshop.leetcode_link
+        document.getElementById('rating').textContent = "Rating: " + workshop.rating // I assume it's workshop.rating, not gift.description
+        document.getElementById('solutionSheet').textContent = "Solution Sheet: " + workshop.solution_sheet // Same as above
+        document.getElementById('discordLink').textContent = "Discord Link: " + workshop.discord_link // Same as above
 
-        document.title = `Workshop - ${workshop.title}`;
+        document.title = `Workshop - ${workshop.title}`
 
         // Create the related concepts section
-        let workshopConcepts = workshop.related_concepts;
+        let workshopConcepts = workshop.related_concepts
         
-        // Create a container for related concepts
-        let workshopConceptsContainer = document.createElement("aside");
-        workshopConceptsContainer.classList.add("workshopConceptsContainer"); // Optional class for styling
+        // Creating container for all concepts
+        let workshopConceptsContainer = document.createElement("aside")
+        workshopConceptsContainer.classList.add("workshopConceptsContainer") // Optional, for styling
+        
+        // Assuming workshopDetails is created previously (your existing code)
+        let workshopDetails = document.createElement('a')
+        workshopDetails.href = `/workshops/${workshop.id}`
+        let workshopTitle = document.createElement('h3')
+        workshopTitle.textContent = `Title: ${workshop.title}`
+        workshopTitle.classList.add('workshopTitle', 'londrina-solid-black')
+        workshopDetails.appendChild(workshopTitle)
 
-        // Create the div for concept tags
-        let conceptsContainer = document.createElement('div');
-        conceptsContainer.classList.add('conceptsContainer');
+        workshopConceptsContainer.appendChild(workshopDetails)
         
-        // Map over related concepts and create a span for each
+        // Creating container for related concepts
+        let conceptsContainer = document.createElement('div')
+        conceptsContainer.classList.add('conceptsContainer')
+        
+        // Mapping over the related concepts and creating a span for each
         workshopConcepts.map(concept => {
-            let conceptSpan = document.createElement('span');
-            conceptSpan.textContent = `${concept}, `;
-            conceptSpan.classList.add('conceptSpan', 'londrina-solid-black');
-            conceptsContainer.appendChild(conceptSpan);
-        });
+            let conceptSpan = document.createElement('span')
+            conceptSpan.textContent = `${concept}, `
+            conceptSpan.classList.add('conceptSpan', 'londrina-solid-black')
+            
+            conceptsContainer.appendChild(conceptSpan)
+        })
+        
+        workshopConceptsContainer.appendChild(conceptsContainer)
 
-        // Append the concepts container to the workshop concepts container
-        workshopConceptsContainer.appendChild(conceptsContainer);
-
-        // Append the entire workshop concepts container to the workshop content
-        workshopContent.appendChild(workshopConceptsContainer);
+        // Append the workshopConceptsContainer to the workshopContent element
+        workshopContent.appendChild(workshopConceptsContainer)
     } 
     else {
-        const message = document.createElement('h2');
-        message.textContent = 'No Workshops Available 😞';
-        workshopContent.appendChild(message);
+        const message = document.createElement('h2')
+        message.textContent = 'No Workshops Available 😞'
+        workshopContent.appendChild(message)
     }
 }
-
 
 
 renderWorkshops()

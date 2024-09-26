@@ -7,6 +7,7 @@ const workshopData = [
         rating: "A",
         solution_sheet_link: "https://example.com/js-solutions",
         video_link: "https://example.com/js-video",
+        difficulty: "Easy",
         discord_server_link: "https://discord.gg/examplejs"
     },
     {
@@ -17,6 +18,7 @@ const workshopData = [
         rating: "B",
         solution_sheet_link: "https://example.com/css-solutions",
         video_link: "https://example.com/css-video",
+        difficulty: "Easy",
         discord_server_link: "https://discord.gg/examplecss"
     },
     {
@@ -27,6 +29,7 @@ const workshopData = [
         rating: "A+",
         solution_sheet_link: "https://example.com/react-solutions",
         video_link: "https://example.com/react-video",
+        difficulty: "Easy",
         discord_server_link: "https://discord.gg/examplereact"
     },
     {
@@ -37,6 +40,7 @@ const workshopData = [
         rating: "B+",
         solution_sheet_link: "https://example.com/nodejs-solutions",
         video_link: "https://example.com/nodejs-video",
+        difficulty: "Easy",
         discord_server_link: "https://discord.gg/examplenode"
     },
     {
@@ -47,6 +51,7 @@ const workshopData = [
         rating: "A-",
         solution_sheet_link: "https://example.com/db-solutions",
         video_link: "https://example.com/db-video",
+        difficulty: "Easy",
         discord_server_link: "https://discord.gg/exampledb"
     },
     {
@@ -57,6 +62,7 @@ const workshopData = [
         rating: "A",
         solution_sheet_link: "https://example.com/ml-solutions",
         video_link: "https://example.com/ml-video",
+        difficulty: "Easy",
         discord_server_link: "https://discord.gg/exampleml"
     },
     {
@@ -67,6 +73,7 @@ const workshopData = [
         rating: "B",
         solution_sheet_link: "https://example.com/security-solutions",
         video_link: "https://example.com/security-video",
+        difficulty: "Easy",
         discord_server_link: "https://discord.gg/examplesecurity"
     },
     {
@@ -77,6 +84,7 @@ const workshopData = [
         rating: "B+",
         solution_sheet_link: "https://example.com/cloud-solutions",
         video_link: "https://example.com/cloud-video",
+        difficulty: "Easy",
         discord_server_link: "https://discord.gg/examplecloud"
     }
 ];
@@ -86,7 +94,8 @@ export default workshopData
 /*
 Schema:
 id: 0,Each problem has: {
-title, related_concepts, problem_link, rating, solution_sheet_link, video_link, discord_server_link}
+difficulty: "Easy",title, related_concepts, problem_link, rating, solution_sheet_link, video_link, 
+discord_server_link}
 
 Overview: 
 id: 0,    
@@ -96,5 +105,6 @@ title - This is the problem name
     rating - An easy, medium, or hard rating of the problem
     solution_link - This is a link to the solution sheet on github. The solution sheet includes a c++, python, javascript, and java solution as well as the algorithm overview and summary
     video_link - This is a link to a video workshop that explains the algorithm approach and a demonstration of how it works
+    difficulty: "Easy",
     discord_server_link - This is a link to the discord server
 */

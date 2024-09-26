@@ -1,3 +1,4 @@
+//vite.config.js
 // It is the behavior that this script triggers that got me confused a couple of weeks ago
 //What does this file do?
 //This file includes custom instructions to the vite tool to be used when it builds the app.
@@ -20,7 +21,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/workshops': {
-        target: 'http://localhost:3001'
+        target: 'http://localhost:3000'
       }
     }
   }
