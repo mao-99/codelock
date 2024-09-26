@@ -102,35 +102,54 @@ const renderWorkshops = async () => {
     }
 }
 
+renderWorkshops()
+
 const renderWorkshop = async () => {
     const requestedID = parseInt(window.location.href.split('/').pop());
     let response = await fetch('/workshops');
     console.log("This is the response", response)
     const workshops = await response.json();
+    console.log("Check #2, ", workshops)
     const workshopContent = document.getElementById('workshop-content');
     if (workshops) {
         let workshop = workshops.find(workshop => workshop.id === requestedID);
     
         if (workshop) {
             // Populate the workshop details
+            let container = document.createElement("div")
+            container.classList.add("container")
             let workshopTitle = document.getElementById('title')
             workshopTitle.textContent = workshop.title;
+            workshopTitle.classList.add('workshopTitle')
+            workshopTitle.classList.add('londrina-solid-black')
             let workshopVideo = document.getElementById("workshopVideo")
             workshopVideo.href = workshop.video_link
             workshopVideo.textContent = 'Workshop Link: ' + workshop.video_link;
+            workshopVideo.classList.add("workshopVideoLink")
+            workshopVideo.classList.add("lugrasimo-regular")
             let difficulty = document.getElementById('difficulty')
             difficulty.textContent = 'Difficulty: ' + workshop.difficulty;
+            difficulty.classList.add("textContent")
+            difficulty.classList.add("londrina-solid-black")
             let leetcode = document.getElementById('leetcodeLink')
             leetcode.href = workshop.leetcode_link
             leetcode.textContent = 'Leetcode: ' + workshop.leetcode_link;
+            leetcode.classList.add("leetcodeLink")
+            leetcode.classList.add("lugrasimo-regular")
             let rating = document.getElementById('rating')
             rating.textContent = "Rating: " + workshop.rating;
+            rating.classList.add("textContent")
+            rating.classList.add("londrina-solid-black")
             let solutionSheet = document.getElementById('solutionSheet')
-            solutionSheet.textContent = "Solution Sheet: " + workshop.solution_sheet;
+            solutionSheet.textContent = "Solution Sheet: " + workshop.solution_sheet_link;
+            solutionSheet.classList.add("textContent")
+            solutionSheet.classList.add("lugrasimo-regular")
             let discord = document.getElementById('discordLink')
-            discord.textContent = "Discord Link: " + workshop.discord_link;
+            discord.textContent = "Discord Link: " + workshop.discord_server_link;
+            discordLink.classList.add("textContent")
+            discordLink.classList.add("lugrasimo-regular")
 
-            document.title = `Workshop - ${workshop.title}`;
+            document.title = `${workshop.title}`;
 
             // Create the related concepts section
             let workshopConcepts = workshop.related_concepts;
@@ -151,11 +170,36 @@ const renderWorkshop = async () => {
                 conceptsContainer.appendChild(conceptSpan);
             });
 
+            // workshopContent.appendChild(workshopTitle)
+
+            
             // Append the concepts container to the workshop concepts container
             workshopConceptsContainer.appendChild(conceptsContainer);
 
+            let row1 = document.createElement('div')
+            let row2 = document.createElement('div')
+            let row3 = document.createElement('div')
+            row1.classList.add('row')
+            row2.classList.add('row')
+            row3.classList.add('row')
+        
+            
             // Append the entire workshop concepts container to the workshop content
-            workshopContent.appendChild(workshopConceptsContainer);
+            // workshopContent.appendChild(workshopConceptsContainer);
+
+
+            row1.appendChild(workshopVideo)
+            row1.appendChild(difficulty)
+            row2.appendChild(leetcode)
+            row2.appendChild(rating)
+            row3.appendChild(solutionSheet)
+            row3.appendChild(discord)
+            container.appendChild(workshopTitle)
+            container.appendChild(workshopConceptsContainer)
+            container.appendChild(row1)
+            container.appendChild(row2)
+            container.appendChild(row3)
+            workshopContent.appendChild(container)
         } 
         else {
             const message = document.createElement('h2');
@@ -164,10 +208,5 @@ const renderWorkshop = async () => {
         }
     }
 }
-
-
-
-renderWorkshops()
-
 
 renderWorkshop()
