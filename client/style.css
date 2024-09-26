@@ -270,3 +270,7 @@ aside{
   display: flex;
   flex-direction: row;
 }
+
+p {
+  color: black;
+}
