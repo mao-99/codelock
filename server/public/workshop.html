@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document Title</title>
-    <script defer src="/scripts/header.js"></script>
-    <script defer src="/scripts/workshops.js"></script>
+    <script defer src="./scripts/header.js"></script>
+    <script defer src="./scripts/workshops.js"></script>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <header></header>
     <main id="workshop-content" class="workshop-info">
+        <div class="workshop-details">
             <h2 id="title"></h2>
             <a id="workshopVideo"></a>
             <a id="difficulty"></a>
@@ -18,7 +19,52 @@
             <a id="rating"></a>
             <a id="solutionSheet"></a>
             <a id="discordLink"></a>
-
+        </div>
     </main>
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const workshopID = window.location.pathname.split('/').pop();
+            
+            fetch(`/workshops/${workshopID}`)
+                .then(response => response.json())
+                .then(workshop => {
+                    if (workshop) {
+                        document.getElementById('title').textContent = workshop.title;
+                        document.getElementById('workshopVideo').href = workshop.video_link;
+                        document.getElementById('workshopVideo').textContent = 'Workshop Link: ' + workshop.video_link;
+                        document.getElementById('difficulty').textContent = 'Difficulty: ' + workshop.difficulty;
+                        document.getElementById('leetcodeLink').href = workshop.leetcode_link;
+                        document.getElementById('leetcodeLink').textContent = 'Leetcode: ' + workshop.leetcode_link;
+                        document.getElementById('rating').textContent = "Rating: " + workshop.rating;
+                        document.getElementById('solutionSheet').textContent = "Solution Sheet: " + workshop.solution_sheet;
+                        document.getElementById('discordLink').textContent = "Discord Link: " + workshop.discord_link;
+                        document.title = `Workshop - ${workshop.title}`;
+
+                        // Create related concepts section
+                        const workshopConceptsContainer = document.createElement("aside");
+                        workshopConceptsContainer.classList.add("workshopConceptsContainer");
+                        
+                        const conceptsContainer = document.createElement('div');
+                        conceptsContainer.classList.add('conceptsContainer');
+                        
+                        workshop.related_concepts.forEach(concept => {
+                            const conceptSpan = document.createElement('span');
+                            conceptSpan.textContent = concept;
+                            conceptSpan.classList.add('conceptSpan', 'londrina-solid-black');
+                            conceptsContainer.appendChild(conceptSpan);
+                        });
+
+                        workshopConceptsContainer.appendChild(conceptsContainer);
+                        document.getElementById('workshopContent').appendChild(workshopConceptsContainer);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    const message = document.createElement('h2');
+                    message.textContent = 'Error loading workshop';
+                    document.getElementById('workshopContent').appendChild(message);
+                });
+        });
+    </script> -->
 </body>
 </html>
