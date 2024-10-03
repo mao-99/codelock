@@ -3,6 +3,8 @@ const renderWorkshops = async () => {
     const data = await response.json()
     const mainContent = document.getElementById("main-content")
 
+    console.log("Debug #1", data)
+
     if (data) {
         console.log("Pass #1: Workshops loaded")
         data.map(workshop => {
